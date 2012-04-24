@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description> </description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <%= scm_xml %>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector">
+  <% if cron_spec != "" %>
+    <hudson.triggers.SCMTrigger>
+      <spec><%= cron_spec %></spec>
+    </hudson.triggers.SCMTrigger>
+  <% end %>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+<% if builders_xml != "" %>
+<%= builders_xml %>
+<% end %>
+  </builders>
+  <publishers>
+  <% if child_projects != "" %>
+    <hudson.tasks.BuildTrigger>
+      <childProjects><%= child_projects %></childProjects>
+      <threshold>
+        <name>UNSTABLE</name>
+        <ordinal>1</ordinal>
+        <color>YELLOW</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  <% end %>
+  </publishers>
+  <buildWrappers/>
+
+</project>
+
