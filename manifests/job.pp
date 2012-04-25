@@ -7,9 +7,9 @@ define jenkins::job($builders_xml = '',
 		ensure => directory,
 	}
 
-	file { "/home/soren/src/puppet-jenkins/new/jobs/${name}/config.xml":
+	file { "/var/lib/jenkins/jobs/${name}/config.xml":
 		content => template("jenkins/config.xml.erb"),
-#		owner => jenkins,
-#		group => nogroup,
+		owner => jenkins,
+		group => nogroup,
 	}
 }
